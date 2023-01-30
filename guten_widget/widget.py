@@ -1,5 +1,6 @@
-from PyQt6.QtWidgets import QApplication, QVBoxLayout, QWidget, QLabel
-from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QHBoxLayout, 
+    QWidget, QLabel, QLineEdit, QPushButton)
+from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtCore import Qt
 import sys
  
@@ -14,10 +15,35 @@ class Window(QWidget):
     def UI(self):
         layout = QVBoxLayout()
         self.setLayout(layout)
- 
-        label = QLabel("Hello World")
-        label.setAlignment(Qt.AlignmentFlag.AlignTop)
-        layout.addWidget(label)
+
+        # Title Label
+        title_label = QLabel("Guten Widget")
+        title_label.setAlignment(Qt.AlignmentFlag.AlignTop)
+        title_label.setFont( QFont("Calibri", 22) )
+
+        # Description Label
+        description_label = QLabel("Enter a book, author, or subject below.")
+        description_label.setAlignment(Qt.AlignmentFlag.AlignTop)
+        description_label.setFont(QFont("Calibri", 14))
+
+        # Search Layout (with label, icon?, and button)
+        search_layout = QHBoxLayout()
+        search_edit = QLineEdit("")
+        search_button = QPushButton("Search")
+        search_layout.addWidget(search_edit)
+        search_layout.addWidget(search_button)
+
+        # Results Label
+        results_label = QLabel("Book Results")
+        results_label.setAlignment(Qt.AlignmentFlag.AlignTop)
+
+        # add our widgets and labels
+        layout.addWidget(title_label)
+        layout.addWidget(description_label)
+        layout.addLayout(search_layout)
+        layout.addWidget(results_label)
+        layout.addStretch()
+        
 
 def main():
     app = QApplication(sys.argv)
