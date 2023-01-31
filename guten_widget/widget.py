@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QHBoxLayout, 
-    QWidget, QLabel, QLineEdit, QPushButton)
+    QWidget, QLabel, QLineEdit, QPushButton, QTextEdit)
 from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtCore import Qt
 import sys
@@ -30,11 +30,13 @@ class Window(QWidget):
         search_layout = QHBoxLayout()
         search_edit = QLineEdit("")
         search_button = QPushButton("Search")
+        search_button.clicked.connect(self.search_guten)
         search_layout.addWidget(search_edit)
         search_layout.addWidget(search_button)
 
         # Results Label
         results_label = QLabel("Book Results")
+        self.results_textedit = QTextEdit("")
         results_label.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         # add our widgets and labels
@@ -42,7 +44,11 @@ class Window(QWidget):
         layout.addWidget(description_label)
         layout.addLayout(search_layout)
         layout.addWidget(results_label)
+        layout.addWidget(self.results_textedit)
         layout.addStretch()
+
+    def search_guten(self):
+        self.results_textedit.setText("Yo, quit pushing my buttons, bruh!")
         
 
 def main():
