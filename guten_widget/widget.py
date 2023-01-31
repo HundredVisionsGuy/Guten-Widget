@@ -1,8 +1,10 @@
-from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QHBoxLayout, 
-    QWidget, QLabel, QLineEdit, QPushButton, QTextEdit)
+from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QWidget, 
+                             QLabel, QHBoxLayout, QLineEdit,
+                             QPushButton, QTextEdit)
 from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtCore import Qt
 import sys
+import controller
  
 class Window(QWidget):
     def __init__(self):
@@ -15,42 +17,44 @@ class Window(QWidget):
     def UI(self):
         layout = QVBoxLayout()
         self.setLayout(layout)
-
-        # Title Label
-        title_label = QLabel("Guten Widget")
+ 
+        # Create our Widgets
+        title_label = QLabel("Guten Search Widget")
         title_label.setAlignment(Qt.AlignmentFlag.AlignTop)
-        title_label.setFont( QFont("Calibri", 22) )
-
-        # Description Label
-        description_label = QLabel("Enter a book, author, or subject below.")
-        description_label.setAlignment(Qt.AlignmentFlag.AlignTop)
+        title_label.setFont(QFont("Calibri", 22))
+        
+        description = "Search the Gutenberg Project by title,"
+        description += " author, or subject."
+        description_label = QLabel(description)
         description_label.setFont(QFont("Calibri", 14))
-
-        # Search Layout (with label, icon?, and button)
+        
         search_layout = QHBoxLayout()
-        search_edit = QLineEdit("")
+        self.search_field = QLineEdit()
+        self.search_field.setFont(QFont("Calibri", 12))
+        self.search_field.setPlaceholderText("title, author, or subject")
+        
         search_button = QPushButton("Search")
-        search_button.clicked.connect(self.search_guten)
-        search_layout.addWidget(search_edit)
+        search_button.setFont(QFont("Calibri", 12))
+        search_button.clicked.connect(self.search)
+        
+        search_layout.addWidget(self.search_field)
         search_layout.addWidget(search_button)
-
-        # Results Label
-        results_label = QLabel("Book Results")
-        self.results_textedit = QTextEdit("")
-        results_label.setAlignment(Qt.AlignmentFlag.AlignTop)
-
-        # add our widgets and labels
+        
+        self.results_text = QTextEdit("Results.")
+        self.results_text.setFont(QFont("Calibri", 12))
         layout.addWidget(title_label)
         layout.addWidget(description_label)
         layout.addLayout(search_layout)
-        layout.addWidget(results_label)
-        layout.addWidget(self.results_textedit)
-        layout.addStretch()
+        layout.addWidget(self.results_text)
 
-    def search_guten(self):
-        self.results_textedit.setText("Yo, quit pushing my buttons, bruh!")
+    def search(self):
+        """get the search text and use it to make an API call to get
+        the results for a search"""
+        search_text = self.search_field.text()
+        search_results = controller.make_call(search_text)
+        self.results_text.setText(search_results)
+        self.results_text.toHtml()
         
-
 def main():
     app = QApplication(sys.argv)
     window = Window()
