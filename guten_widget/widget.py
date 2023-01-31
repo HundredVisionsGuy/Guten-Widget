@@ -53,9 +53,9 @@ class Window(QWidget):
         search_text = self.search_field.text()
         search_results = controller.make_call(search_text)
         self.results_text.setText(search_results)
+        self.results_text.toHtml()
         
 def main():
-    
     app = QApplication(sys.argv)
     window = Window()
     window.show()
