@@ -18,7 +18,7 @@ def make_call(query: str) -> str:
     
     response = requests.get(url)
     if response.ok:
-        results = get_top_results(response)
+        results = get_top_results(response, 4)
         results = format_results(results)
         return results
     else:
@@ -49,6 +49,3 @@ if __name__ == "__main__":
     print("Here is where we can test our code.")
     results = make_call("wells")
     print(results)
-    results_dict = get_top_results(results)
-    results_str = format_results(results_dict)
-    print(results_str)

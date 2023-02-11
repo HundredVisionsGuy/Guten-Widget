@@ -42,6 +42,8 @@ class Window(QWidget):
         
         self.results_text = QTextEdit("Results.")
         self.results_text.setFont(QFont("Calibri", 12))
+
+        # Add all our widgets
         layout.addWidget(title_label)
         layout.addWidget(description_label)
         layout.addLayout(search_layout)
@@ -50,7 +52,10 @@ class Window(QWidget):
     def search(self):
         """get the search text and use it to make an API call to get
         the results for a search"""
+        # get the user input
         search_text = self.search_field.text()
+
+        # Make an API call with the controller script
         search_results = controller.make_call(search_text)
         self.results_text.setText(search_results)
         self.results_text.toHtml()
