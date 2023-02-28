@@ -2,6 +2,10 @@ from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QWidget,
                              QLabel, QHBoxLayout, QLineEdit,
                              QPushButton, QTextEdit)
 from PyQt6.QtGui import QIcon, QFont
+from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QWidget, 
+                             QLabel, QHBoxLayout, QLineEdit,
+                             QPushButton, QTextEdit)
+from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtCore import Qt
 import sys
 import controller
