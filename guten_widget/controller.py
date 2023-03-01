@@ -35,10 +35,17 @@ def format_results(results: list) -> str:
     formatted_results = ""
     for item in results:
         title = item.get("title")
-        formatted_results += "Title: " + title + "\n\t"
+        formatted_results += "<p><b>Title: <i>" + title + "</i></b></p>"
         authors = item.get("authors")
-        author = authors[0].get("name")
-        formatted_results += "by " + author + "\n"
+        if len(authors) > 1:
+            formatted_results += "<p>Authors</p><ul>"
+            for author_data in authors:
+                author = author_data.get("name")
+                formatted_results += "<li>" + author + "</li>"
+            formatted_results += "</ul>"
+        else:
+            author = authors[0].get("name")
+            formatted_results += "<p>by " + author + "</p>"
     return formatted_results
 
 if __name__ == "__main__":

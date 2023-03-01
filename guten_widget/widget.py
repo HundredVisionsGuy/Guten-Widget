@@ -44,7 +44,7 @@ class Window(QWidget):
         search_layout.addWidget(self.search_field)
         search_layout.addWidget(search_button)
         
-        self.results_text = QTextEdit("Results.")
+        self.results_text = QTextEdit("<h2>Results.</h2>")
         self.results_text.setFont(QFont("Calibri", 12))
 
         # Add all our widgets
@@ -67,6 +67,18 @@ class Window(QWidget):
 def main():
     app = QApplication(sys.argv)
     window = Window()
+
+    # Set Styles
+    app.setStyleSheet("""
+        QWidget {
+            background-color: #336699;
+            color: #f1f1f1;
+        }
+        h2 {
+            font-size: 70%;
+        }
+    """)
+
     window.show()
     sys.exit(app.exec())
 
