@@ -36,6 +36,7 @@ class Window(QWidget):
         self.search_field = QLineEdit()
         self.search_field.setFont(QFont("Calibri", 12))
         self.search_field.setPlaceholderText("title, author, or subject")
+        self.search_field.returnPressed.connect(self.search)
         
         search_button = QPushButton("Search")
         search_button.setFont(QFont("Calibri", 12))
@@ -71,8 +72,15 @@ def main():
     # Set Styles
     app.setStyleSheet("""
         QWidget {
-            background-color: #336699;
-            color: #f1f1f1;
+            background-color: #99bbdd;
+            color: #111111;
+            padding: 10px;
+        }
+        QVBoxLayout {
+            padding: 10px;
+        }
+        QTextEdit {
+            border: 0;
         }
         h2 {
             font-size: 70%;

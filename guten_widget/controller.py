@@ -35,6 +35,10 @@ def format_results(results: list) -> str:
     formatted_results = ""
     for item in results:
         title = item.get("title")
+        media = item.get("formats")
+        img_src = media.get("image/jpeg")
+        if ".jpg" == img_src[-4:]:
+            formatted_results += get_image(img_src)
         formatted_results += "<p><b>Title: <i>" + title + "</i></b></p>"
         authors = item.get("authors")
         if len(authors) > 1:
@@ -47,6 +51,12 @@ def format_results(results: list) -> str:
             author = authors[0].get("name")
             formatted_results += "<p>by " + author + "</p>"
     return formatted_results
+
+def get_image(source: str) -> str:
+    """inserts a floated image box using the src"""
+    tag = '<div><img src="'
+    tag += source + '" width="200"></div>'
+    return tag
 
 if __name__ == "__main__":
     call_results = make_call("douglas")
