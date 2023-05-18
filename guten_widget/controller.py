@@ -41,6 +41,8 @@ def format_results(results: list) -> str:
             formatted_results += get_image(img_src)
         formatted_results += "<p><b>Title: <i>" + title + "</i></b></p>"
         authors = item.get("authors")
+
+        # If there are more than 1 authors, put them in a list
         if len(authors) > 1:
             formatted_results += "<p>Authors</p><ul>"
             for author_data in authors:

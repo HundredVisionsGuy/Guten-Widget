@@ -2,10 +2,6 @@ from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QWidget,
                              QLabel, QHBoxLayout, QLineEdit,
                              QPushButton, QTextEdit)
 from PyQt6.QtGui import QIcon, QFont
-from PyQt6.QtWidgets import (QApplication, QVBoxLayout, QWidget, 
-                             QLabel, QHBoxLayout, QLineEdit,
-                             QPushButton, QTextEdit)
-from PyQt6.QtGui import QIcon, QFont
 from PyQt6.QtCore import Qt
 import sys
 import controller
@@ -34,7 +30,8 @@ class Window(QWidget):
         
         search_layout = QHBoxLayout()
         self.search_field = QLineEdit()
-        self.search_field.setFont(QFont("Calibri", 12))
+        self.search_field.setStyleSheet("background-color: #dcdcdc;")
+        self.search_field.setFont(QFont("Calibri", 12, 400, True))
         self.search_field.setPlaceholderText("title, author, or subject")
         self.search_field.returnPressed.connect(self.search)
         
@@ -72,7 +69,7 @@ def main():
     # Set Styles
     app.setStyleSheet("""
         QWidget {
-            background-color: #99bbdd;
+            background-color: #aaddff;
             color: #111111;
             padding: 10px;
         }
@@ -81,6 +78,8 @@ def main():
         }
         QTextEdit {
             border: 0;
+            background-color: #eee;
+            font-size: 200%;
         }
         h2 {
             font-size: 70%;
